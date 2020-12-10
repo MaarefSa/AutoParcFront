@@ -1,0 +1,31 @@
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar" data-sidebarbg="skin5">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav" class="p-t-30">
+        <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" routerLink="vehicule" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Vehicule</span></a></li>
+        <li class="sidebar-item" *ngIf="admin"> <a class="sidebar-link waves-effect waves-dark sidebar-link" routerLink="conducteur" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Conducteurs </span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" routerLink="affectation" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Mission</span></a></li>
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" routerLink="consommation" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Consommation</span></a></li>
+
+
+
+
+        <li class="sidebar-item" ><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Utilisateurs </span></a>
+          <ul aria-expanded="false" class="collapse  first-level" *ngIf="admin">
+            <li class="sidebar-item"><a href="authentication-login.html" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Liste utilisateur </span></a></li>
+            <li class="sidebar-item"><a routerLink="register" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu">Nouveau utilisateur </span></a></li>
+          </ul>
+        </li>
+        <li class="sidebar-item" *ngIf="admin"> <a class="sidebar-link waves-effect waves-dark sidebar-link" routerLink="/home" aria-expanded="false"><i class="mdi mdi-alert"></i><span class="hide-menu">Statistique</span></a></li>
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->

@@ -1,0 +1,245 @@
+
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Conducteur</h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<div class="container-fluid">
+  <!-- ============================================================== -->
+  <!-- Start Page Content -->
+  <!-- ============================================================== -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Nouveau conducteur:</h5>
+          <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#add">Ajouter</button>
+          <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+              <thead>
+              <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Num Permis</th>
+                <th>Date prise fonction</th>
+                <th>Telephone</th>
+                <th>Adresse</th>
+                <th>Action</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let c of conducteurs">
+                <td>{{c.matricule}}</td>
+                <td>{{c.nom}}</td>
+                <td>{{c.prenom}}</td>
+                <td>{{c.numPermis}}</td>
+                <td>{{c.dateFunction}}</td>
+                <td>{{c.telephone}}</td>
+                <td>{{c.adresse}}</td>
+                <td>
+                  <button (click)="updateConducteur(c)" data-toggle="modal" data-target="#update"  type="button" class="btn btn-cyan btn-sm" >Edit</button>&nbsp;
+                  <button (click)="deleteCond(c)" type="button" class="btn btn-danger btn-sm">Delete</button>
+                  <!--  data-toggle="modal" data-target="#add"-->
+                </td>
+
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End PAge Content -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Right sidebar -->
+  <!-- ============================================================== -->
+  <!-- .right-sidebar -->
+  <!-- ============================================================== -->
+  <!-- End Right sidebar -->
+  <!-- ============================================================== -->
+</div>
+<div class=" example-modal " >
+  <div class="modal modal-primary" id="add">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <form role="form">
+            <div class="box-body">
+              <h3>Ajouter un nouveau conducteur</h3>
+
+              <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label >Matricule :</label>
+                  <input type="text"  class="form-control" formControlName="matricule" placeholder="Enter matricule" [ngClass]="{ 'is-invalid': submitted && f.matricule.errors }" >
+                  <div *ngIf="submitted && f.matricule.errors">
+                    <div *ngIf="f.matricule.errors.required">Matricule is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Nom :</label>
+                  <input  class="form-control" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" placeholder="Enter le nom">
+                  <div *ngIf="submitted && f.nom.errors">
+                    <div *ngIf="f.nom.errors.required">Nom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Prenom :</label>
+                  <input  class="form-control" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" placeholder="Enter le prenom">
+                  <div *ngIf="submitted && f.prenom.errors">
+                    <div *ngIf="f.prenom.errors.required">Prenom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Num permis:</label>
+                  <input  class="form-control" formControlName="numPermis"  [ngClass]="{ 'is-invalid': submitted && f.numPermis.errors }"  placeholder="Enter le numero du permis">
+                  <div *ngIf="submitted && f.numPermis.errors">
+                    <div *ngIf="f.numPermis.errors.required">Num permis is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Date prise fonction:</label>
+                  <input  type="date" class="form-control" formControlName="dateFunction"  [ngClass]="{ 'is-invalid': submitted && f.dateFunction.errors }"  placeholder="Enter la date de prise fonction">
+                  <div *ngIf="submitted && f.dateFunction.errors">
+                    <div *ngIf="f.dateFunction.errors.required">Date prise fonction is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Telephone:</label>
+                  <input  class="form-control" formControlName="telephone"  [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }"  placeholder="Enter le numero du telephone">
+                  <div *ngIf="submitted && f.telephone.errors">
+                    <div *ngIf="f.telephone.errors.required">Telephone is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Adresse:</label>
+                  <input  class="form-control" formControlName="adresse"  [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }"  placeholder="Enter l'adresse">
+                  <div *ngIf="submitted && f.adresse.errors">
+                    <div *ngIf="f.adresse.errors.required">Adresse is required</div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button  type="submit"  class="btn btn-success mr-2">Enrégistrer</button>
+                  <button class="btn btn-light"  data-dismiss="modal">Annuler</button>
+                </div>
+              </form>
+            </div>
+          </form>
+
+
+        </div>
+
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+<div class=" example-modal " >
+  <div class="modal modal-primary" id="update">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <form role="form">
+            <div class="box-body">
+              <h3>Modifier conducteur</h3>
+
+              <form [formGroup]="editForm" (ngSubmit)="onSubmit1()">
+                <div class="form-group">
+                  <label >Matricule :</label>
+                  <input type="text"  class="form-control" formControlName="matricule" placeholder="Enter matricule" [ngClass]="{ 'is-invalid': submitted && f1.matricule.errors }" >
+                  <div *ngIf="submitted && f1.matricule.errors">
+                    <div *ngIf="f1.matricule.errors.required">Matricule is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Nom :</label>
+                  <input  class="form-control" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f1.nom.errors }" placeholder="Enter le nom">
+                  <div *ngIf="submitted && f1.nom.errors">
+                    <div *ngIf="f1.nom.errors.required">Nom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Prenom :</label>
+                  <input  class="form-control" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f1.prenom.errors }" placeholder="Enter le prenom">
+                  <div *ngIf="submitted && f1.prenom.errors">
+                    <div *ngIf="f1.prenom.errors.required">Prenom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Num permis:</label>
+                  <input  class="form-control" formControlName="numPermis"  [ngClass]="{ 'is-invalid': submitted && f1.numPermis.errors }"  placeholder="Enter le numero du permis">
+                  <div *ngIf="submitted && f1.numPermis.errors">
+                    <div *ngIf="f1.numPermis.errors.required">Num permis is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Date prise fonction:</label>
+                  <input  class="form-control" formControlName="dateFunction"  [ngClass]="{ 'is-invalid': submitted && f1.dateFunction.errors }"  >
+                  <div *ngIf="submitted && f1.dateFunction.errors">
+                    <div *ngIf="f1.dateFunction.errors.required">Date prise fonction is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Telephone:</label>
+                  <input class="form-control" formControlName="telephone"  [ngClass]="{ 'is-invalid': submitted && f1.telephone.errors }"  placeholder="Enter le numero du telephone">
+                  <div *ngIf="submitted && f1.telephone.errors">
+                    <div *ngIf="f1.telephone.errors.required">Telephone is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Adresse:</label>
+                  <input  class="form-control" formControlName="adresse"  [ngClass]="{ 'is-invalid': submitted && f1.adresse.errors }"  placeholder="Enter l'adresse">
+                  <div *ngIf="submitted && f1.adresse.errors">
+                    <div *ngIf="f1.adresse.errors.required">Adresse is required</div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button  type="submit"  class="btn btn-success mr-2">Update</button>
+                  <button class="btn btn-light"  data-dismiss="modal">Annuler</button>
+                </div>
+              </form>
+            </div>
+          </form>
+
+
+        </div>
+
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+
+

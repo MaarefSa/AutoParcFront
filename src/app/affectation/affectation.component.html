@@ -1,0 +1,265 @@
+
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Mission</h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">GPark</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mission</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<div class="container-fluid">
+  <!-- ============================================================== -->
+  <!-- Start Page Content -->
+  <!-- ============================================================== -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Nouvelle Mission:</h5>
+          <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#add">Ajouter</button>
+          <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+              <thead>
+              <tr>
+                <th>Code mission</th>
+                <th>Date de debut</th>
+                <th>Date fin prevue</th>
+                <th>Date fin reelle</th>
+                <th>Direction</th>
+                <th>Adresse</th>
+                <th>Vehicule</th>
+                <th>Conducteur 1</th>
+                <th>Conducteur 2</th>
+                <th>Action</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let a of affectations" >
+                <td>{{a.codeMission}}</td>
+                <td>{{a.debutAffect}}</td>
+                <td>{{a.finAffectPrevue}}</td>
+                <td>{{a.finAffectReelle}}</td>
+                <td>{{a.direction}}</td>
+                <td>{{a.adresse}}</td>
+                <td>{{a.vehicule.id}}</td>
+                <td>{{a.chauffeur.id}}</td>
+                <td>6</td>
+
+
+                <td>
+                  <button  (click)="updateAffectation(a)" data-toggle="modal" data-target="#update" type="button" class="btn btn-cyan btn-sm" >Edit</button>&nbsp;
+                  <button (click)="deleteAffect(a)" type="button" class="btn btn-danger btn-sm">Delete</button>
+
+                </td>
+
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End PAge Content -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Right sidebar -->
+  <!-- ============================================================== -->
+  <!-- .right-sidebar -->
+  <!-- ============================================================== -->
+  <!-- End Right sidebar -->
+  <!-- ============================================================== -->
+</div>
+<div class=" example-modal " >
+  <div class="modal modal-primary" id="add">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <form role="form">
+            <div class="box-body">
+              <h3>Ajouter une nouvelle Mission</h3>
+
+              <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label >Code Mission :</label>
+                  <input  class="form-control" formControlName="codeMission"  [ngClass]="{ 'is-invalid': submitted && f.codeMission.errors }"  placeholder="Enter code mission">
+                  <div *ngIf="submitted && f.codeMission.errors">
+                    <div *ngIf="f.codeMission.errors.required">code mission is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Debut_Aff :</label>
+                  <input type="date"  class="form-control" formControlName="debutAffect"  [ngClass]="{ 'is-invalid': submitted && f.debutAffect.errors }" >
+                  <div *ngIf="submitted && f.debutAffect.errors">
+                    <div *ngIf="f.debutAffect.errors.required">Matricule is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Fin_Aff_Prevue :</label>
+                  <input  type="date" class="form-control" formControlName="finAffectPrevue" [ngClass]="{ 'is-invalid': submitted && f.finAffectPrevue.errors }" placeholder="Enter date fin prevue">
+                  <div *ngIf="submitted && f.finAffectPrevue.errors">
+                    <div *ngIf="f.finAffectPrevue.errors.required">Nom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Fin_Aff_Reelle :</label>
+                  <input  type="date" class="form-control" formControlName="finAffectReelle" [ngClass]="{ 'is-invalid': submitted && f.finAffectReelle.errors }" placeholder="Enter date fin reelle">
+                  <div *ngIf="submitted && f.finAffectReelle.errors">
+                    <div *ngIf="f.finAffectReelle.errors.required">Prenom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Direction :</label>
+                  <input  class="form-control" formControlName="direction"  [ngClass]="{ 'is-invalid': submitted && f.direction.errors }"  placeholder="Enter la direction">
+                  <div *ngIf="submitted && f.direction.errors">
+                    <div *ngIf="f.direction.errors.required">Direction is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Adresse :</label>
+                  <input  class="form-control" formControlName="adresse"  [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }"  placeholder="Enter l'adresse">
+                  <div *ngIf="submitted && f.direction.errors">
+                    <div *ngIf="f.direction.errors.required">Address is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Vehicule :</label>
+                  <select class="form-control" id="exampleFormControlSelect1" formControlName="vehicule" [ngClass]="{ 'is-invalid': submitted && f.vehicule.errors }">
+
+                    <option *ngFor="let v of vehicules" [ngValue]="v.id" >{{ v.id }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Conducteur :</label>
+                  <select class="form-control" id="exampleFormControlSelect2" formControlName="chauffeur" [ngClass]="{ 'is-invalid': submitted && f.conducteur.errors }" >
+                    <option *ngFor="let c of conducteurs" [ngValue]="c.id">{{c.id}}</option>
+
+                  </select>
+                </div>
+
+                <div class="modal-footer">
+                  <button  type="submit"  class="btn btn-success mr-2"  >Enrégistrer</button>
+                  <button class="btn btn-light"  data-dismiss="modal">Annuler</button>
+                </div>
+              </form>
+            </div>
+          </form>
+
+
+        </div>
+
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+<div class=" example-modal " >
+  <div class="modal modal-primary" id="update">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <form role="form">
+            <div class="box-body">
+              <h3>Modifier la mission</h3>
+
+              <form [formGroup]="editForm" (ngSubmit)="onSubmit1()">
+                <div class="form-group">
+                  <label >Code Mission :</label>
+                  <input  class="form-control" formControlName="codeMission"  [ngClass]="{ 'is-invalid': submitted && f1.codeMission.errors }"  placeholder="Enter code mission">
+                  <div *ngIf="submitted && f1.codeMission.errors">
+                    <div *ngIf="f1.codeMission.errors.required">code mission is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Debut_Aff :</label>
+                  <input type="text"  class="form-control" formControlName="debutAffect" placeholder="Enter date debut" [ngClass]="{ 'is-invalid': submitted && f1.debutAffect.errors }" >
+                  <div *ngIf="submitted && f1.debutAffect.errors">
+                    <div *ngIf="f1.debutAffect.errors.required">Matricule is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Fin_Aff_Prevue :</label>
+                  <input  class="form-control" formControlName="finAffectPrevue" [ngClass]="{ 'is-invalid': submitted && f1.finAffectPrevue.errors }" placeholder="Enter date fin prevue">
+                  <div *ngIf="submitted && f1.finAffectPrevue.errors">
+                    <div *ngIf="f1.finAffectPrevue.errors.required">Nom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Fin_Aff_Reelle :</label>
+                  <input  class="form-control" formControlName="finAffectReelle" [ngClass]="{ 'is-invalid': submitted && f1.finAffectReelle.errors }" placeholder="Enter date fin reelle">
+                  <div *ngIf="submitted && f1.finAffectReelle.errors">
+                    <div *ngIf="f1.finAffectReelle.errors.required">Prenom is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Direction :</label>
+                  <input  class="form-control" formControlName="direction"  [ngClass]="{ 'is-invalid': submitted && f1.direction.errors }"  placeholder="Enter la direction">
+                  <div *ngIf="submitted && f1.direction.errors">
+                    <div *ngIf="f1.direction.errors.required">Num permis is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Adresse :</label>
+                  <input  class="form-control" formControlName="adresse"  [ngClass]="{ 'is-invalid': submitted && f1.adresse.errors }"  placeholder="Enter l'adresse">
+                  <div *ngIf="submitted && f1.direction.errors">
+                    <div *ngIf="f1.direction.errors.required">Address is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Vehicule :</label>
+                  <select class="form-control" id="exampleFormControlSelect0" formControlName="vehicule" [ngClass]="{ 'is-invalid': submitted && f1.vehicule.errors }">
+                    <option *ngFor="let v of vehicules">{{v.id}}</option>
+
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Conducteur :</label>
+                  <select class="form-control" id="exampleFormControlSelect3" formControlName="chauffeur" [ngClass]="{ 'is-invalid': submitted && f1.conducteur.errors }"  >
+                    <option *ngFor="let c of conducteurs">{{c.id}}</option>
+
+                  </select>
+                </div>
+
+                <div class="modal-footer">
+                  <button  type="submit"  class="btn btn-success mr-2">Modifier</button>
+                  <button class="btn btn-light"  data-dismiss="modal">Annuler</button>
+                </div>
+              </form>
+            </div>
+          </form>
+
+
+        </div>
+
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+
+
+

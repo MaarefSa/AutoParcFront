@@ -1,0 +1,38 @@
+<div class="col-md-3">
+  <h2 class="text-center">Edit Vehicule</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Immatricule:</label>
+      <input type="text" formControlName="immatricule" placeholder="Title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.immatricule.errors }">
+      <div *ngIf="submitted && f.immatricule.errors">
+        <div *ngIf="f.immatricule.errors.required">Immatricule is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Marque:</label>
+      <input type="text" formControlName="marque" placeholder="Description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.marque.errors }">
+      <div *ngIf="submitted && f.marque.errors">
+        <div *ngIf="f.marque.errors.required">Marque is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Num chassis:</label>
+      <input type="text" formControlName="numchassis" placeholder="Price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.numchassis.errors }">
+      <div *ngIf="submitted && f.numchassis.errors">
+        <div *ngIf="f.numchassis.errors.required">Num chassis is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Carte grise:</label>
+      <input type="text" formControlName="cartegrise" placeholder="Company" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cartegrise.errors }">
+      <div *ngIf="submitted && f.cartegrise.errors">
+        <div *ngIf="f.cartegrise.errors.required">cartegrise is required</div>
+      </div>
+    </div>
+
+    <button type="submit"  class="btn btn-info">Update</button>
+  </form>
+</div>

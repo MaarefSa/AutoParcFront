@@ -1,0 +1,231 @@
+
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Consommation</h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<div class="container-fluid">
+  <!-- ============================================================== -->
+  <!-- Start Page Content -->
+  <!-- ============================================================== -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Nouvelle consommation:</h5>
+          <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#add">Ajouter</button>
+          <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+              <thead>
+              <tr>
+                <th>Mission</th>
+                <th>Reference</th>
+                <th>Carburant</th>
+                <th>Huile</th>
+                <th>Fixe</th>
+                <th>Divers</th>
+                <th>Totale</th>
+                <th>Action</th>
+
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let c of consommations">
+                <td>{{c.affectation.id}}</td>
+                <td>{{c.reference}}</td>
+                <td>{{c.carburant+" DT"}}</td>
+                <td>{{c.huile+" DT"}}</td>
+                <td>{{c.fixe+" DT"}}</td>
+                <td>{{c.divers+" DT"}}</td>
+                <td>{{c.carburant+c.huile+c.fixe+c.divers+" DT"}}</td>
+
+                <td>
+                  <button  (click)="updateConsommation(c)" data-toggle="modal" data-target="#update" type="button" class="btn btn-cyan btn-sm" >Edit</button>&nbsp;
+                  <button (click)="deleteCons(c)" type="button" class="btn btn-danger btn-sm">Delete</button>
+
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- End PAge Content -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Right sidebar -->
+  <!-- ============================================================== -->
+  <!-- .right-sidebar -->
+  <!-- ============================================================== -->
+  <!-- End Right sidebar -->
+  <!-- ============================================================== -->
+</div>
+<div class=" example-modal " >
+  <div class="modal modal-primary" id="add">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <form role="form">
+            <div class="box-body">
+              <h3>Ajouter une nouvelle consommation</h3>
+
+              <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label >Reference :</label>
+                  <input type="text"  class="form-control" formControlName="reference" placeholder="Enter reference" [ngClass]="{ 'is-invalid': submitted && f.reference.errors }" >
+                  <div *ngIf="submitted && f.reference.errors">
+                    <div *ngIf="f.reference.errors.required">Reference is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Carburant :</label>
+                  <input  class="form-control" formControlName="carburant" [ngClass]="{ 'is-invalid': submitted && f.carburant.errors }" placeholder="Enter la valeur du carburant">
+                  <div *ngIf="submitted && f.carburant.errors">
+                    <div *ngIf="f.carburant.errors.required">Carburant is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Huile :</label>
+                  <input  class="form-control" formControlName="huile" [ngClass]="{ 'is-invalid': submitted && f.huile.errors }" placeholder="Enter la valeur d'huile">
+                  <div *ngIf="submitted && f.huile.errors">
+                    <div *ngIf="f.huile.errors.required">Huile is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Fixe :</label>
+                  <input  class="form-control" formControlName="fixe" [ngClass]="{ 'is-invalid': submitted && f.fixe.errors }"  placeholder="Enter les frais fixe">
+                  <div *ngIf="submitted && f.fixe.errors">
+                    <div *ngIf="f.fixe.errors.required">Frais fixe is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Divers :</label>
+                  <input  class="form-control" formControlName="divers" [ngClass]="{ 'is-invalid': submitted && f.divers.errors }"  placeholder="Enter les divers">
+                  <div *ngIf="submitted && f.divers.errors">
+                    <div *ngIf="f.divers.errors.required">Divers is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Affectation :</label>
+                  <select class="form-control" id="exampleFormControlSelect1" formControlName="affectation" [ngClass]="{ 'is-invalid': submitted && f.affectation.errors }">
+                    <option *ngFor="let a of affectations" >{{a.id}}</option>
+
+
+                  </select>
+                </div>
+
+                <div class="modal-footer">
+                  <button  type="submit"  class="btn btn-success mr-2">Enrégistrer</button>
+                  <button class="btn btn-light"  data-dismiss="modal">Annuler</button>
+                </div>
+              </form>
+            </div>
+          </form>
+
+
+        </div>
+
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+<div class=" example-modal " >
+  <div class="modal modal-primary" id="update">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <form role="form">
+            <div class="box-body">
+              <h3>Modifier la consommation</h3>
+
+              <form [formGroup]="editForm" (ngSubmit)="onSubmit1()">
+                <div class="form-group">
+                  <label >Reference :</label>
+                  <input type="text"  class="form-control" formControlName="reference" placeholder="Enter reference" [ngClass]="{ 'is-invalid': submitted && f1.reference.errors }" >
+                  <div *ngIf="submitted && f1.reference.errors">
+                    <div *ngIf="f1.reference.errors.required">Reference is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Carburant :</label>
+                  <input  class="form-control" formControlName="carburant" [ngClass]="{ 'is-invalid': submitted && f1.carburant.errors }" placeholder="Enter la valeur du carburant">
+                  <div *ngIf="submitted && f1.carburant.errors">
+                    <div *ngIf="f1.carburant.errors.required">Carburant is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Huile :</label>
+                  <input  class="form-control" formControlName="huile" [ngClass]="{ 'is-invalid': submitted && f1.huile.errors }" placeholder="Enter la valeur d'huile">
+                  <div *ngIf="submitted && f1.huile.errors">
+                    <div *ngIf="f1.huile.errors.required">Huile is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Fixe :</label>
+                  <input  class="form-control" formControlName="fixe" [ngClass]="{ 'is-invalid': submitted && f1.fixe.errors }"  placeholder="Enter les frais fixe">
+                  <div *ngIf="submitted && f1.fixe.errors">
+                    <div *ngIf="f1.fixe.errors.required">Frais fixe is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Divers :</label>
+                  <input  class="form-control" formControlName="divers" [ngClass]="{ 'is-invalid': submitted && f1.divers.errors }"  placeholder="Enter les divers">
+                  <div *ngIf="submitted && f1.divers.errors">
+                    <div *ngIf="f1.divers.errors.required">Divers is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Affectation :</label>
+                  <select class="form-control" id="exampleFormControlSelect3" formControlName="affectation" [ngClass]="{ 'is-invalid': submitted && f1.affectation.errors }">
+                    <option *ngFor="let a of affectations" >{{a.id}}</option>
+
+
+                  </select>
+                </div>
+
+                <div class="modal-footer">
+                  <button  type="submit"  class="btn btn-success mr-2">Modifier</button>
+                  <button class="btn btn-light"  data-dismiss="modal">Annuler</button>
+                </div>
+              </form>
+            </div>
+          </form>
+
+
+        </div>
+
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+

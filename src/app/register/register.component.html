@@ -1,0 +1,100 @@
+<div class="main-wrapper">
+  <!-- ============================================================== -->
+  <!-- Preloader - style you can find in spinners.css -->
+  <!-- ============================================================== -->
+  <!--<div class="preloader">-->
+    <!--<div class="lds-ripple">-->
+      <!--<div class="lds-pos"></div>-->
+      <!--<div class="lds-pos"></div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!-- ============================================================== -->
+  <!-- Preloader - style you can find in spinners.css -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Login box.scss -->
+  <!-- ============================================================== -->
+  <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
+    <div class="auth-box bg-dark border-top border-secondary">
+      <div>
+        <!--<div class="text-center p-t-20 p-b-20">-->
+          <!--<span class="db"><img src="../../assets/images/logo.png" alt="logo" /></span>-->
+        <!--</div>-->
+        <!-- Form -->
+        <form class="form-horizontal m-t-20" [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="row p-b-30">
+            <div class="col-12">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
+                </div>
+                <input type="email" class="form-control form-control-lg" formControlName="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback" >
+                  <div *ngIf="f.username.errors.required">username is required</div>
+                </div>
+              </div>
+              <!-- email -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-danger text-white" id="basic-addon2"><i class="ti-email"></i></span>
+                </div>
+                  <select class="form-control form-control-lg" id="exampleFormControlSelect1" formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                    <option>role_user</option>
+                    <option>role_admin</option>
+                  </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-warning text-white" id="basic-addon3"><i class="ti-pencil"></i></span>
+                </div>
+                <input type="password" class="form-control form-control-lg"  formControlName="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Password is required</div>
+                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-info text-white" id="basic-addon4"><i class="ti-pencil"></i></span>
+                </div>
+                <input type="password" class="form-control form-control-lg"  formControlName="passwordC" placeholder=" Confirm Password" aria-label="Password" aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': submitted && f.passwordC.errors }">
+                <div *ngIf="submitted && f.passwordC.errors" class="invalid-feedback">
+                  <div *ngIf="f.passwordC.errors.required">Password is required</div>
+                  <div *ngIf="f.passwordC.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row border-top border-secondary">
+            <div class="col-12">
+              <div class="form-group">
+                <div class="p-t-20">
+                  <button class="btn btn-block btn-lg btn-info"[disabled]="loading">Sign Up</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- Login box.scss -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Page wrapper scss in scafholding.scss -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Page wrapper scss in scafholding.scss -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Right Sidebar -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Right Sidebar -->
+  <!-- ============================================================== -->
+  <script>
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".preloader").fadeOut();
+  </script>
+</div>

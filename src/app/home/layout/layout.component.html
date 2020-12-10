@@ -1,0 +1,149 @@
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+  <div class="row">
+    <div class="col-12 d-flex no-block align-items-center">
+      <h4 class="page-title">Statistique</h4>
+      <div class="ml-auto text-right">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+  <!-- ============================================================== -->
+  <!-- Sales Cards  -->
+  <!-- ============================================================== -->
+  <div class="row">
+    <!-- Column -->
+
+    <!-- Column -->
+    <div class="col-md-6 col-lg-4 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-success text-center" *ngIf="vehicules;">
+          <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+          <h3 class="font-light text-white">{{vehicules.length}}</h3>
+          <h6 class="text-white">Vehicule</h6>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-2 col-xlg-3" data-toggle="modal" data-target="#fullHeightModalRight">
+      <div class="card card-hover">
+        <div class="box bg-warning text-center"  *ngIf="conducteurs; ">
+          <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+          <h3 class="font-light text-white">{{conducteurs.length}}</h3>
+          <h6 class="text-white"> Conducteur</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column -->
+    <div class="col-md-6 col-lg-4 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-danger text-center"*ngIf="consommations;">
+          <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
+          <h3 class="font-light text-white">{{consommations.length}}</h3>
+          <h6 class="text-white">Consommation</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column -->
+    <div class="col-md-6 col-lg-2 col-xlg-3">
+      <div class="card card-hover">
+        <div class="box bg-info text-center"*ngIf="affectations;">
+          <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
+          <h3 class="font-light text-white">{{affectations.length}}</h3>
+          <h6 class="text-white">Mission</h6>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+
+    <!-- Column -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- Sales chart -->
+  <!-- ============================================================== -->
+
+  <!-- ============================================================== -->
+  <!-- Sales chart -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Recent comment and chats -->
+  <!-- ============================================================== -->
+
+  <!-- ============================================================== -->
+  <!-- Recent comment and chats -->
+  <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- Full Height Modal Right -->
+<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" >
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Liste des conducteur</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <button type="button" class="list-group-item list-group-item-action" *ngFor="let c of conducteurs" data-toggle="modal" data-target="#secondModal" data-dismiss="modal">{{c.nom +" "+ c.prenom}}<span class="badge badge-pill badge-danger float-right" *ngIf="affectations; ">{{c.id+6}}%</span></button>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Height Modal Right -->
+<!-- Full Height Seconde Modal  -->
+<!-- Modal -->
+<div class="modal fade" id="secondModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Rapport du conducteur</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-lg-9">
+          <div class="flot-chart">
+            <div class="flot-chart-content" id="flot-line-chart">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- En Seconde Modal  -->
