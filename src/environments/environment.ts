@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   base_url: 'http://127.0.0.1:8000/api',
-  user_url: 'http://127.0.0.1:8000'
+  user_url: 'http://127.0.0.1:8000',
+  base2_url: 'http://localhost:3000'
 };
 
 /*

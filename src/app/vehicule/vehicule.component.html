@@ -30,6 +30,18 @@
           <h5 class="card-title">Nouvel vehicule:</h5>
           <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#add">Ajouter</button>
           <div class="table-responsive">
+          <div class="row">
+            <div class="col-md-8">
+              <input placeholder="search..." type="text" class="form-control" [(ngModel)]="searchText" (keyup)="searchVehicule()">
+            </div>
+            <div class="col-md-4">
+            <select class="mdb-select md-form" [(ngModel)]="critereValue">
+              <option value="" disabled selected>Choisir un critere de recherche</option>
+              <option value="marque">Marque</option>
+              <option value="couleur">Couleur</option>
+            </select>
+            </div>
+          </div>
             <table id="zero_config" class="table table-striped table-bordered">
               <thead>
               <tr>
@@ -43,7 +55,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let v of vehicules">
+              <tr *ngFor="let v of searchVeh">
                 <td>{{v.immatricule}}</td>
                 <td>{{v.marque}}</td>
                 <td>{{v.numchassis}}</td>
@@ -93,14 +105,15 @@
               <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                   <label >Immatricule :</label>
-                  <input type="text"  class="form-control" formControlName="immatricule" placeholder="Enter immatricule" [ngClass]="{ 'is-invalid': submitted && f.immatricule.errors }" >
-                  <div *ngIf="submitted && f.immatricule.errors">
+                  <input type="text"  class="form-control" formControlName="immatricule" placeholder="Enter immatricule" [ngClass]="{ 'is-invalid': f.immatricule.touched && f.immatricule.errors }" >
+                  <div *ngIf="f.immatricule.touched && f.immatricule.errors">
                     <div *ngIf="f.immatricule.errors.required">Immatricule is required</div>
+                    <div *ngIf="f.immatricule.errors.pattern">Immatricule invalid</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label >Marque :</label>
-                  <select class="form-control" id="exampleFormControlSelect3" formControlName="marque" [ngClass]="{ 'is-invalid': submitted && f.marque.errors }">
+                  <select class="form-control" id="exampleFormControlSelect3" formControlName="marque" [ngClass]="{ 'is-invalid': f.marque.touched && f.marque.errors }">
 
                     <option *ngFor="let m of marques" >{{ m.name }}</option>
                   </select>
@@ -108,27 +121,30 @@
                 </div>
                 <div class="form-group">
                   <label >Num chassis :</label>
-                  <input  class="form-control" formControlName="numchassis" [ngClass]="{ 'is-invalid': submitted && f.numchassis.errors }" placeholder="Enter le numero de chassis">
-                  <div *ngIf="submitted && f.numchassis.errors">
+                  <input  class="form-control" formControlName="numchassis" [ngClass]="{ 'is-invalid': f.numchassis.touched && f.numchassis.errors }" placeholder="Enter le numero de chassis">
+                  <div *ngIf="f.numchassis.touched && f.numchassis.errors">
                     <div *ngIf="f.numchassis.errors.required">Num chassis is required</div>
+                    <div *ngIf="f.numchassis.errors.pattern">Num chassis invalid </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label >Carte grise :</label>
-                  <input  class="form-control" formControlName="cartegrise" [ngClass]="{ 'is-invalid': submitted && f.cartegrise.errors }"  placeholder="Enter le numero de la carte grise">
-                  <div *ngIf="submitted && f.cartegrise.errors">
+                  <input  class="form-control" formControlName="cartegrise" [ngClass]="{ 'is-invalid': f.cartegrise.touched && f.cartegrise.errors }"  placeholder="Enter le numero de la carte grise">
+                  <div *ngIf="f.cartegrise.touched && f.cartegrise.errors">
                     <div *ngIf="f.cartegrise.errors.required">Carte grise is required</div>
+                    <div *ngIf="f.cartegrise.errors.maxLength">too long</div>
+                    <div *ngIf="f.cartegrise.errors.minLength">too short</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label >Couleur :</label>
-                  <select class="form-control" id="exampleFormControlSelect2" formControlName="couleur" [ngClass]="{ 'is-invalid': submitted && f.couleur.errors }">
+                  <select class="form-control" id="exampleFormControlSelect2" formControlName="couleur" [ngClass]="{ 'is-invalid': f.couleur.touched && f.couleur.errors }">
 
                     <option *ngFor="let c of couleurs" >{{ c.name }}</option>
                   </select>
                 </div>
                 <div class="modal-footer">
-                  <button  type="submit"  class="btn btn-success mr-2">Enrégistrer</button>
+                  <button  type="submit" class="btn btn-success mr-2">Enrégistrer</button>
                   <button class="btn btn-light"  data-dismiss="modal">Annuler</button>
                 </div>
               </form>
@@ -159,30 +175,34 @@
               <form [formGroup]="editForm" (ngSubmit)="onSubmit1()">
                 <div class="form-group">
                   <label >Immatricule :</label>
-                  <input type="text"  class="form-control" formControlName="immatricule" placeholder="Enter immatricule" [ngClass]="{ 'is-invalid': submitted && f1.immatricule.errors }" >
-                  <div *ngIf="submitted && f1.immatricule.errors">
+                  <input type="text"  class="form-control" formControlName="immatricule" placeholder="Enter immatricule" [ngClass]="{ 'is-invalid': f1.immatricule.touched && f1.immatricule.errors }" >
+                  <div *ngIf="f1.immatricule.touched && f1.immatricule.errors">
                     <div *ngIf="f1.immatricule.errors.required">Immatricule is required</div>
+                    <div *ngIf="f1.immatricule.errors.pattern">Immatricule invalid</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label >Marque :</label>
-                  <input  class="form-control" formControlName="marque" [ngClass]="{ 'is-invalid': submitted && f1.marque.errors }" placeholder="Enter un marque">
-                  <div *ngIf="submitted && f1.marque.errors">
+                  <input  class="form-control" formControlName="marque" [ngClass]="{ 'is-invalid': f1.marque.touched && f1.marque.errors }" placeholder="Enter un marque">
+                  <div *ngIf="f1.marque.touched && f1.marque.errors">
                     <div *ngIf="f1.marque.errors.required">Marque is required</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label >Num chassis :</label>
-                  <input  class="form-control" formControlName="numchassis" [ngClass]="{ 'is-invalid': submitted && f1.numchassis.errors }" placeholder="Enter le numero de chassis">
-                  <div *ngIf="submitted && f1.numchassis.errors">
+                  <input  class="form-control" formControlName="numchassis" [ngClass]="{ 'is-invalid': f1.numchassis.touched && f1.numchassis.errors }" placeholder="Enter le numero de chassis">
+                  <div *ngIf="f1.numchassis.touched && f1.numchassis.errors">
                     <div *ngIf="f1.numchassis.errors.required">Num chassis is required</div>
+                    <div *ngIf="f1.numchassis.errors.pattern">Num chassis invalid</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label >Carte grise :</label>
-                  <input  class="form-control" formControlName="cartegrise" [ngClass]="{ 'is-invalid': submitted && f1.cartegrise.errors }"  placeholder="Enter le numero de la carte grise">
-                  <div *ngIf="submitted && f1.cartegrise.errors">
+                  <input  class="form-control" formControlName="cartegrise" [ngClass]="{ 'is-invalid': f1.cartegrise.touched && f1.cartegrise.errors }"  placeholder="Enter le numero de la carte grise">
+                  <div *ngIf="f1.cartegrise.touched && f1.cartegrise.errors">
                     <div *ngIf="f1.cartegrise.errors.required">Carte grise is required</div>
+                    <div *ngIf="f1.cartegrise.errors.maxLength">too long</div>
+                    <div *ngIf="f1.cartegrise.errors.minLength">too short</div>
                   </div>
                 </div>
                 <div class="form-group">

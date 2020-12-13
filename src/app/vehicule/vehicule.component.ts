@@ -13,7 +13,8 @@ import {Router} from '@angular/router';
 export class VehiculeComponent implements OnInit {
   public loading = false;
   public error = '';
-  vehicules: Vehicule;
+  vehicules: Vehicule[];
+  searchVeh: Vehicule[];
   marques = [{name:'Iveco'},{name:'Daf'},{name:'Renault'},{name:'Mercedes'},{name:'Volvo'}];
   couleurs = [{name:'Blanc'},{name:'Noire'},{name:'Rouge'},{name:'Vert'},{name:'Gold'},{name:'Bleu'},{name:'Gris'}];
   constructor(private  vehiculeService: VehiculeService, private router: Router , private formBuilder: FormBuilder ) { }
@@ -21,31 +22,33 @@ export class VehiculeComponent implements OnInit {
   addForm: FormGroup;
   editForm: FormGroup;
   submitted = false;
+  searchText="";
+  critereValue="";
   ngOnInit() {
     this.getAll();
     // this.resetForm();
     this.addForm = this.formBuilder.group({
       id: [],
-      immatricule: ['', Validators.required],
+      immatricule: ['', [Validators.required , Validators.pattern("^([0-9]+ tun +[0-9]{1,4})$")] ],
       marque: ['', Validators.required],
-      numchassis: ['', Validators.required],
-      cartegrise: ['', Validators.required],
+      numchassis: ['', [Validators.required , Validators.pattern("^([A-Z]{2}[0-9]{6})$")]],
+      cartegrise: ['', [Validators.required , Validators.maxLength(6), Validators.maxLength(6)]],
       couleur: ['', Validators.required]
     });
     this.editForm = this.formBuilder.group({
       id: [],
-      immatricule: ['', Validators.required],
+      immatricule: ['', [Validators.required , Validators.pattern("^([0-9]+ tun +[0-9]{1,4})$")]],
       marque: ['', Validators.required],
-      numchassis: ['', Validators.required],
-      cartegrise: ['', Validators.required],
+      numchassis: ['', [Validators.required , Validators.pattern("^([A-Z]{2}[0-9]{6})$")]],
+      cartegrise: ['', [Validators.required , Validators.maxLength(6), Validators.maxLength(6)]],
       couleur: ['', Validators.required]
     });
   }
 
   getAll(): void {
-    this.vehiculeService.getAllVehicules().subscribe(res => {
+    this.vehiculeService.getAllVehicules().subscribe(res  => {
       console.log(res);
-      this.vehicules = res;
+      this.searchVeh = this.vehicules = res;
     });
   }
 
@@ -53,7 +56,7 @@ export class VehiculeComponent implements OnInit {
     this.vehiculeService.removeVehicules(vehicule.id).subscribe(res => {
       console.log(res);
       this.getAll();
-      window.location.reload();
+      //window.location.reload();
     },(error) => {
       this.error = error;
       alert('Cette vehicule est affecté a une mission');
@@ -80,6 +83,7 @@ export class VehiculeComponent implements OnInit {
 
 
   }
+
   onSubmit() {
     this.submitted = true;
     if (this.addForm.valid) {
@@ -91,10 +95,12 @@ export class VehiculeComponent implements OnInit {
           this.error = error;
           alert('Vehicule already exists');
         });
-      
-     
+
+
     }
   }
+
+
   onSubmit1() {
     this.submitted = true;
     if (this.editForm.valid) {
@@ -105,6 +111,16 @@ export class VehiculeComponent implements OnInit {
     }
   }
 
+  searchVehicule(){
+    if(this.critereValue == "marque"){
+      this.searchVeh = this.vehicules.filter((veh) => veh.marque.toLowerCase().includes(this.searchText.toLowerCase()));
+    }else if(this.critereValue == "couleur"){
+      this.searchVeh = this.vehicules.filter((veh) => veh.couleur.toLowerCase().includes(this.searchText.toLowerCase()));
+    }else{
+      alert("choisir un critere");
+    }
+
+  }
 
   // resetForm(form?: NgForm) {
   //   if (form != null ) {

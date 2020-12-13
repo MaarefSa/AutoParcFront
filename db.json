@@ -1,0 +1,75 @@
+{
+  "vehicules": [
+    {
+      "id": 1,
+      "immatricule": "33 tun 3333",
+      "marque": "Iveco",
+      "numchassis": "CH11111",
+      "cartegrise": "333334",
+      "couleur": "noir"
+    },
+    {
+      "id": 2,
+      "immatricule": "44 tun 4444",
+      "marque": "BMW",
+      "numchassis": "CH22222",
+      "cartegrise": "2222222",
+      "couleur": "rouge"
+    },
+    {
+      "id": 3,
+      "immatricule": "22 tun 2222",
+      "marque": "Daf",
+      "numchassis": "CH3333",
+      "cartegrise": "11111",
+      "couleur": "bleu"
+    },
+    {
+      "id": 5,
+      "immatricule": "11 tun 1111",
+      "marque": "Renault",
+      "numchassis": "CH112233",
+      "cartegrise": "112233",
+      "couleur": "Bleu"
+    }
+  ],
+  "affectations": [
+    {
+      "id": 1,
+      "codeMission": "MI01",
+      "debutAffect": "2019-06-06",
+      "finAffectPrevue": "2019-07-06",
+      "finAffectReelle": "2019-08-06",
+      "direction": "Monastir",
+      "adresse": "Rue foulan",
+      "vehicule": {
+        "id": 1,
+        "immatricule": "33 tun 3333",
+        "marque": "Iveco",
+        "numchassis": "CH11111",
+        "cartegrise": "333334",
+        "couleur": "noir"
+      },
+      "conducteur": "ali"
+    },
+    {
+      "id": 2,
+      "codeMission": "MI02",
+      "debutAffect": "2020-01-06",
+      "finAffectPrevue": "2020-02-06",
+      "finAffectReelle": "2020-03-06",
+      "direction": "Sousse",
+      "adresse": "Rue feltan",
+      "vehicule": {
+        "id": 2,
+        "immatricule": "44 tun 4444",
+        "marque": "BMW",
+        "numchassis": "CH22222",
+        "cartegrise": "2222222",
+        "couleur": "rouge"
+      },
+      "conducteur": "rami"
+    }
+
+  ]
+}

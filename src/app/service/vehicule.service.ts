@@ -12,9 +12,13 @@ export class VehiculeService {
 
   public formData: Vehicule;
 
+
   constructor(private http: HttpClient) { }
 
-  public getAllVehicules() {
+
+
+  getAllVehicules() {
+
     const token = localStorage.getItem('token');
 
     const headers = new HttpHeaders({
@@ -22,9 +26,9 @@ export class VehiculeService {
       "Authorization": 'Bearer ' + localStorage.getItem("token"),
     });
     const options = { headers : headers };
-
-    return this.http.get(environment.base_url + '/vehicule/show', options);
+    return this.http.get<Vehicule[]>(environment.base2_url+ '/vehicules', options);
   }
+
   getVehiculeById(id) {
     const token = localStorage.getItem('token');
 
@@ -33,8 +37,75 @@ export class VehiculeService {
       "Authorization": 'Bearer ' + localStorage.getItem("token"),
     });
     const options = { headers : headers };
-    return this.http.get<Vehicule>(environment.base_url + '/vehicule/showById' + '/' + id, options);
+    return this.http.get<Vehicule>(environment.base2_url + '/vehicules' + '/' + id, options);
   }
+  updateVehicule(formData: Vehicule) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+    return this.http.put(environment.base2_url + '/vehicules' + '/' + formData.id, formData, options);
+
+  }
+  public removeVehicules(id) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+
+    return this.http.delete(environment.base2_url + '/vehicules' + '/' + id, options);
+  }
+  public addVehicule(formData: Vehicule) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+    return this.http.post(environment.base2_url + '/vehicules', formData, options);
+  }
+
+  /*
+
+    public getAllVehicules() {
+      const token = localStorage.getItem('token');
+
+      const headers = new HttpHeaders({
+        "Content-type": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem("token"),
+      });
+      const options = { headers : headers };
+
+      return this.http.get(environment.base_url + '/vehicule/show', options);
+    }
+    getVehiculeById(id) {
+      const token = localStorage.getItem('token');
+
+      const headers = new HttpHeaders({
+        "Content-type": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem("token"),
+      });
+      const options = { headers : headers };
+      return this.http.get<Vehicule>(environment.base_url + '/vehicule/showById' + '/' + id, options);
+    }
+    updateVehicule(formData: Vehicule) {
+      const token = localStorage.getItem('token');
+
+      const headers = new HttpHeaders({
+        "Content-type": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem("token"),
+      });
+      const options = { headers : headers };
+      return this.http.post(environment.base_url + '/vehicule/edit' + '/' + formData.id, formData, options);
+
+    }
   public removeVehicules(id) {
     const token = localStorage.getItem('token');
 
@@ -46,7 +117,6 @@ export class VehiculeService {
 
     return this.http.delete(environment.base_url + '/vehicule/delete' + '/' + id, options);
   }
-
   public addVehicule(formData: Vehicule) {
     const token = localStorage.getItem('token');
 
@@ -57,18 +127,12 @@ export class VehiculeService {
     const options = { headers : headers };
     return this.http.post(environment.base_url + '/vehicule/create', formData, options);
   }
+    */
 
-  updateVehicule(formData: Vehicule) {
-    const token = localStorage.getItem('token');
 
-    const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": 'Bearer ' + localStorage.getItem("token"),
-    });
-    const options = { headers : headers };
-    return this.http.post(environment.base_url + '/vehicule/edit' + '/' + formData.id, formData, options);
 
-  }
+
+
 
 
 }

@@ -11,6 +11,65 @@ export class AffectationService {
 
   constructor(private http: HttpClient) { }
 
+
+  public getAllaffectation() {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+    return this.http.get(environment.base2_url + '/affectations', options);
+  }
+
+  public getAffectationById(id) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+    return this.http.get(environment.base2_url + '/affectations' + '/' + id, options);
+  }
+
+  addAffectation(formData: Affectation) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+    return this.http.post(environment.base2_url + '/affectations' , formData, options);
+  }
+  public deleteAffectation(id) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+    return this.http.delete(environment.base2_url + '/affectations' + '/' + id, options);
+  }
+  public updateAffectation(formData: Affectation) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": 'Bearer ' + localStorage.getItem("token"),
+    });
+    const options = { headers : headers };
+    return this.http.put(environment.base2_url + '/affectations' + '/' + formData.id, formData, options);
+  }
+
+
+
+
+
+/*
   public getAllaffectation() {
     const token = localStorage.getItem('token');
 
@@ -62,5 +121,5 @@ export class AffectationService {
     });
     const options = { headers : headers };
     return this.http.post(environment.base_url + '/affectation/edit' + '/' + formData.id, formData, options);
-  }
+  }*/
 }
