@@ -144,9 +144,11 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Vehicule :</label>
-                  <select class="form-control" id="exampleFormControlSelect1" formControlName="vehicule" [ngClass]="{ 'is-invalid': submitted && f.vehicule.errors }">
+                  <select class="form-control"  id="exampleFormControlSelect1" formControlName="vehicule" [ngClass]="{ 'is-invalid': submitted && f.vehicule.errors }">
 
-                    <option *ngFor="let v of vehicules" [ngValue]="v.id" >{{ v.id }}</option>
+                      <option *ngFor="let v of vehicules" [ngValue]=" v.immatricule" >{{ v.immatricule }}</option>
+
+
                   </select>
                 </div>
                 <div class="form-group">

@@ -20,17 +20,17 @@
       "id": 3,
       "immatricule": "22 tun 2222",
       "marque": "Daf",
-      "numchassis": "CH3333",
-      "cartegrise": "11111",
+      "numchassis": "CH333333",
+      "cartegrise": "111111",
       "couleur": "bleu"
     },
     {
-      "id": 5,
-      "immatricule": "11 tun 1111",
-      "marque": "Renault",
-      "numchassis": "CH112233",
-      "cartegrise": "112233",
-      "couleur": "Bleu"
+      "id": 6,
+      "immatricule": "00 tun 0000",
+      "marque": "Range Rover",
+      "numchassis": "CH010101",
+      "cartegrise": "000000",
+      "couleur": "Gold"
     }
   ],
   "affectations": [
@@ -69,7 +69,17 @@
         "couleur": "rouge"
       },
       "conducteur": "rami"
+    },
+    {
+      "id": 3,
+      "codeMission": "MI03",
+      "debutAffect": "2020-12-18",
+      "finAffectPrevue": "2020-12-26",
+      "finAffectReelle": "2020-12-31",
+      "direction": "Mahdia",
+      "adresse": "Rue katha",
+      "vehicule": "00 tun 1111",
+      "chauffeur": 12
     }
-
   ]
 }

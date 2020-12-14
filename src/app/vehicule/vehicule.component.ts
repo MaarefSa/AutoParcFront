@@ -15,7 +15,7 @@ export class VehiculeComponent implements OnInit {
   public error = '';
   vehicules: Vehicule[];
   searchVeh: Vehicule[];
-  marques = [{name:'Iveco'},{name:'Daf'},{name:'Renault'},{name:'Mercedes'},{name:'Volvo'}];
+  marques = [{name:'Iveco'},{name:'Daf'},{name:'Renault'},{name:'Mercedes'},{name:'Volvo'},{name:'Range Rover'}];
   couleurs = [{name:'Blanc'},{name:'Noire'},{name:'Rouge'},{name:'Vert'},{name:'Gold'},{name:'Bleu'},{name:'Gris'}];
   constructor(private  vehiculeService: VehiculeService, private router: Router , private formBuilder: FormBuilder ) { }
 
@@ -63,7 +63,7 @@ export class VehiculeComponent implements OnInit {
     });
   }
   updateVehicule(vehicule: Vehicule) {
-    localStorage.removeItem("vehiculeId");
+    //localStorage.removeItem("vehiculeId");
     localStorage.setItem("vehiculeId", vehicule.id);
     // appel constructeur of new vehicule
     const vehiculeId = localStorage.getItem('vehiculeId');
